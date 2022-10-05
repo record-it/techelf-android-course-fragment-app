@@ -99,7 +99,6 @@ public class MainFragment extends Fragment {
             }
             thread.interrupt();
             Log.i("APP", "Thread started");
-            thread.start();
         });
     }
 }

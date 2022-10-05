@@ -23,6 +23,9 @@ import pl.recordit.examples.techlif.fragmentapp.R;
 //TODO należy dodać permission INTERNET
 public class ExerciseFragment extends Fragment {
 
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
