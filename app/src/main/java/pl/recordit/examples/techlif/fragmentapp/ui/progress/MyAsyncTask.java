@@ -6,13 +6,22 @@ import android.widget.ProgressBar;
 
 public class MyAsyncTask extends AsyncTask<Void, Integer, String> {
     private final ProgressBar progressBar;
+    private volatile boolean isCanceled;
     public MyAsyncTask(ProgressBar progressBar) {
         this.progressBar = progressBar;
+    }
+
+    public void cancel() {
+        isCanceled = true;
     }
 
     @Override
     protected String doInBackground(Void... voids) {
         for(int i = 0; i < 500; i++){
+            if (isCanceled){
+                Log.i("APP", "Task canceled");
+                return "Canceled";
+            }
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
