@@ -1,4 +1,4 @@
-package pl.recordit.examples.techlif.fragmentapp.ui.form;
+package pl.recordit.examples.techlif.fragmentapp.ui.progress;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,25 +14,22 @@ import android.view.ViewGroup;
 
 import pl.recordit.examples.techlif.fragmentapp.R;
 
-public class FormFragment extends Fragment {
-    private static FormFragment instance;
+public class ProgressFragment extends Fragment {
 
-    public static FormFragment getInstance() {
-        if (instance == null) {
-            instance =  new FormFragment();
-        }
-        return instance;
+
+    public static ProgressFragment newInstance() {
+        return new ProgressFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_form, container, false);
+        return inflater.inflate(R.layout.fragment_progress, container, false);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    //TODO Dodaj do fragmentu Form przycisk do przechodzenia do fragmentu Main
+
 }
