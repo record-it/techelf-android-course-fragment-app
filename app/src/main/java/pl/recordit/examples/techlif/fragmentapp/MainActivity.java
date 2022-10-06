@@ -3,6 +3,7 @@ package pl.recordit.examples.techlif.fragmentapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -25,7 +26,7 @@ import pl.recordit.examples.techlif.fragmentapp.ui.sensors.SensorFragment;
 public class MainActivity extends AppCompatActivity {
     private Button mainButton;
     private Button formButton;
-
+    public MapFragment map = new MapFragment();
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
        switch(item.getItemId()){
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         ProgressFragment progress = ProgressFragment.newInstance();
         ExerciseFragment exercise = new ExerciseFragment();
         SensorFragment sensor = new SensorFragment();
-        MapFragment map = new MapFragment();
+
         FormFragment form = FormFragment.getInstance();
         if (savedInstanceState == null) {
             getSupportFragmentManager()
