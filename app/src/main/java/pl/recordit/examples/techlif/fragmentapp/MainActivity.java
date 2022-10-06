@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
                return true;
            case R.id.action_form:
                switchToFragment("form");
+               return true;
+           case R.id.action_sensor:
+               switchToFragment("sensor");
        }
        return super.onOptionsItemSelected(item);
     }

@@ -30,4 +30,9 @@
         android:orderInCategory="100"
         android:title="@string/action_exercise_label_menu"
         />
+    <item
+        android:id="@+id/action_sensor"
+        android:orderInCategory="100"
+        android:title="@string/action_sensor_label_menu"
+        />
 </menu>

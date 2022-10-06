@@ -19,8 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pl.recordit.examples.techlif.fragmentapp.R;
-//TODO Zdefiniuj własną klasę implementującą interfejs SensorEvent
-//TODO W metodzie onResume zarejstruj obiekt słuchacza zdefiniowanej wyżej klasy
+//TODO Zdefiniuj własną klasę implementującą interfejs SensorEventListener
+//TODO W metodzie onResume zarejestruj obiekt słuchacza zdefiniowanej wyżej klasy
 //TODO w metodzie onPause usuń słuchacza metodą unregisterListener wskazują obiekt utworzony w punkcie powyżej
 public class SensorFragment extends Fragment {
     public static SensorFragment newInstance() {
@@ -38,14 +38,16 @@ public class SensorFragment extends Fragment {
         super.onCreate(savedInstanceState);
         manager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         Sensor tempSens = manager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
-        if (tempSens != null){
-            Log.i("APP", "Temperature sensor present!");
+        if (tempSens == null){
+            Log.i("APP", "Temperature sensor is not present!");
             return;
         }
-        manager.registerListener(new SensorEventListener() {
+        Log.i("APP", "Temperature sensor is present!");
+        boolean result = manager.registerListener(new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
                 Log.i("APP", "Value changed " + sensorEvent.values[0]);
+                Log.i("APP", "Accuracy " + sensorEvent.accuracy);
             }
             @Override
             public void onAccuracyChanged(Sensor sensor, int i) {
@@ -54,7 +56,7 @@ public class SensorFragment extends Fragment {
                         Log.i("APP", "Accuracy changed to HIGH");
                         break;
                     case SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM:
-                        Log.i("APP", "Accuracy changed to HIGH");
+                        Log.i("APP", "Accuracy changed to MEDIUM");
                         break;
                     case SensorManager.SENSOR_STATUS_ACCURACY_LOW:
                         Log.i("APP", "Accuracy changed to LOW");
@@ -64,7 +66,8 @@ public class SensorFragment extends Fragment {
                         break;
                 }
             }
-        }, tempSens, SensorManager.SENSOR_DELAY_FASTEST);
+        }, tempSens, 100_000);
+        Log.i("APP", "Registering result " + result);
     }
 
 }
