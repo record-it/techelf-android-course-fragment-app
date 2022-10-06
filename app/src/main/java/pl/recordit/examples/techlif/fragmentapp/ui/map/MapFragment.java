@@ -18,7 +18,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import pl.recordit.examples.techlif.fragmentapp.R;
 
@@ -38,7 +41,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -50,8 +52,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onStart() {
         super.onStart();
-        mapFragment =
-                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         Log.i("APP", "Map fragment " + mapFragment);
         this.mapFragment.getMapAsync(this);
     }
@@ -60,6 +61,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
         LatLng warsaw = new LatLng(52, 21);
+        Marker myMarker = map.addMarker(
+                new MarkerOptions()
+                        .position(warsaw)
+                        .title("Warsaw City")
+                        .anchor(0,0)
+                        .alpha(0.5f)
+                        .snippet("Stolica Polski")
+                        .draggable(true)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+
+        );
         map.moveCamera(CameraUpdateFactory.newLatLng(warsaw));
     }
 }
