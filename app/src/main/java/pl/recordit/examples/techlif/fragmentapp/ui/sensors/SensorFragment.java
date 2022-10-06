@@ -19,11 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pl.recordit.examples.techlif.fragmentapp.R;
-
+//TODO Zdefiniuj własną klasę implementującą interfejs SensorEvent
+//TODO W metodzie onResume zarejstruj obiekt słuchacza zdefiniowanej wyżej klasy
+//TODO w metodzie onPause usuń słuchacza metodą unregisterListener wskazują obiekt utworzony w punkcie powyżej
 public class SensorFragment extends Fragment {
-
-
-
     public static SensorFragment newInstance() {
         return new SensorFragment();
     }
