@@ -55,14 +55,9 @@ public class CameraFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        view = view.findViewById(R.id.preview);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+        view = v.findViewById(R.id.preview);
         if (imageCapture == null) {
             imageCapture = new ImageCapture.Builder().build();
         }
@@ -73,11 +68,18 @@ public class CameraFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> future = ProcessCameraProvider.getInstance(getContext());
         future.addListener(() -> {
                     try {
                         ProcessCameraProvider provider = future.get();
+                        Log.i("APP", "provider " + provider);
                         Preview preview = new Preview.Builder().build();
                         preview.setSurfaceProvider(view.getSurfaceProvider());
                         CameraSelector selector = CameraSelector.DEFAULT_FRONT_CAMERA;

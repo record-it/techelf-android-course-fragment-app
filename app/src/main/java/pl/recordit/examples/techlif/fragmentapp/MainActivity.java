@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import pl.recordit.examples.techlif.fragmentapp.ui.camera.CameraFragment;
 import pl.recordit.examples.techlif.fragmentapp.ui.exercise.ExerciseFragment;
 import pl.recordit.examples.techlif.fragmentapp.ui.form.FormFragment;
 import pl.recordit.examples.techlif.fragmentapp.ui.main.MainFragment;
@@ -29,27 +30,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-       switch(item.getItemId()){
-           case R.id.action_progress:
-               switchToFragment("progress");
-               return true;
-           case R.id.action_list:
-               return true;
-           case R.id.action_camera:
-               return true;
-           case R.id.action_exercise:
-               switchToFragment("sensor");
-               return true;
-           case R.id.action_thread:
-               switchToFragment("main");
-               return true;
-           case R.id.action_form:
-               switchToFragment("form");
-               return true;
-           case R.id.action_sensor:
-               switchToFragment("sensor");
-       }
-       return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_progress:
+                switchToFragment("progress");
+                return true;
+            case R.id.action_list:
+                return true;
+            case R.id.action_camera: {
+                CameraFragment camera = new CameraFragment();
+                getSupportFragmentManager().beginTransaction()
+                                .add(R.id.container, camera, "camera")
+                                .hide(camera)
+                        .commitNow();
+                switchToFragment("camera");
+            }
+            return true;
+            case R.id.action_exercise:
+                switchToFragment("sensor");
+                return true;
+            case R.id.action_thread:
+                switchToFragment("main");
+                return true;
+            case R.id.action_form:
+                switchToFragment("form");
+                return true;
+            case R.id.action_sensor:
+                switchToFragment("sensor");
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -70,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         SensorFragment sensor = new SensorFragment();
         MapFragment map = new MapFragment();
         FormFragment form = FormFragment.getInstance();
+        CameraFragment camera = new CameraFragment();
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -88,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void switchToFragment(String tag){
+    private void switchToFragment(String tag) {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         Optional<Fragment> showed = fragments
                 .stream()
