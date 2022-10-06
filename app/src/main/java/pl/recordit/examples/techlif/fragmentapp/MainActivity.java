@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import pl.recordit.examples.techlif.fragmentapp.ui.exercise.ExerciseFragment;
 import pl.recordit.examples.techlif.fragmentapp.ui.form.FormFragment;
 import pl.recordit.examples.techlif.fragmentapp.ui.main.MainFragment;
+import pl.recordit.examples.techlif.fragmentapp.ui.map.MapFragment;
 import pl.recordit.examples.techlif.fragmentapp.ui.progress.ProgressFragment;
 import pl.recordit.examples.techlif.fragmentapp.ui.sensors.SensorFragment;
 
@@ -66,14 +67,18 @@ public class MainActivity extends AppCompatActivity {
         ProgressFragment progress = ProgressFragment.newInstance();
         ExerciseFragment exercise = new ExerciseFragment();
         SensorFragment sensor = new SensorFragment();
+        MapFragment map = new MapFragment();
+        FormFragment form = FormFragment.getInstance();
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, FormFragment.getInstance(), "form")
+                    .add(R.id.container, form, "form")
                     .add(R.id.container, main, "main")
                     .add(R.id.container, progress, "progress")
                     .add(R.id.container, exercise, "exercise")
                     .add(R.id.container, sensor, "sensor")
+                    .add(R.id.container, map, "map")
+                    .hide(map)
                     .hide(main)
                     .hide(progress)
                     .hide(exercise)
